@@ -1,12 +1,14 @@
-<script setup>
-defineProps({
-  msg: {
-    type: String,
-    required: true,
-  },
-})
-</script>
+<script setup></script>
 
-<template></template>
+<template>
+  <div>1231</div>
+</template>
 
-<style scoped></style>
+<style scoped>
+div {
+  width: 100px;
+  height: 100px;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+</style>

@@ -1,33 +1,22 @@
 <script setup>
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
-// import Sidebar from './components/items/Sidebar.vue'
-import ThemeButton from './components/items/ThemeButton.vue'
+import { RouterView } from 'vue-router'
+import Sidebar from '@/components/items/Sidebar.vue'
+import ThemeWrapper from './components/items/ThemeWrapper.vue'
 import Button from './components/items/Button.vue'
 </script>
 
 <template>
-  <div>
+  <ThemeWrapper>
+    <Sidebar></Sidebar>
     <Button></Button>
-  </div>
+    <RouterView></RouterView>
+  </ThemeWrapper>
 </template>
 
 <style scoped>
-div {
-  height: 52px;
-}
-* {
-  padding: 0;
-  margin: 0;
-  box-sizing: content-box;
-  border: 1px solid white;
+/* 让 .full-screen 占据整个屏幕 */
+.full-screen {
+  flex: 1;
+  min-height: 0;
 }
 </style>
-<!-- <div class="sidebar-container">
-      <Sidebar></Sidebar>
-    </div>
-    <div class="content-container">
-      <RouterView />
-    </div> -->
-
-<!-- <ThemeButton></ThemeButton> -->

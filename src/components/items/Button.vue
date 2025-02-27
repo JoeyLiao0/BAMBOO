@@ -1,16 +1,36 @@
 <script setup>
+import { useThemeStore } from '@/stores/theme'
+import { storeToRefs } from 'pinia'
 import { ref } from 'vue'
 
-const isToggled = ref(false)
+const props = defineProps({
+  height: {
+    type: Number,
+    default: 50,
+  },
+  width: {
+    type: Number,
+    default: 100,
+  },
+  margin: {
+    type: Number,
+    default: 4,
+  },
+})
+
+const themeStore = useThemeStore()
+const { currentThemeName } = storeToRefs(themeStore)
+
+const isDark = ref(currentThemeName.value === 'dark')
 
 function toggleSwitch() {
-  console.log('Switch toggled:', isToggled.value)
+  themeStore.setTheme(isDark.value ? 'dark' : 'light')
 }
 </script>
 
 <template>
   <label class="switch">
-    <input type="checkbox" v-model="isToggled" @change="toggleSwitch" />
+    <input type="checkbox" v-model="isDark" @change="toggleSwitch" />
     <div class="slider">
       <div class="round"></div>
     </div>
@@ -19,9 +39,9 @@ function toggleSwitch() {
 
 <style scoped>
 .switch {
-  --height: 50px;
-  --width: 160px;
-  --margin: 4px;
+  --height: v-bind(props.height + 'px');
+  --width: v-bind(props.width + 'px');
+  --margin: v-bind(props.margin + 'px');
 
   position: relative;
   display: inline-block;
