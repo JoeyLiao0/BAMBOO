@@ -1,8 +1,11 @@
 <script setup>
-import { RouterView } from 'vue-router'
-import Sidebar from '@/components/items/Sidebar.vue'
-import ThemeWrapper from './components/items/ThemeWrapper.vue'
-import Button from './components/items/Button.vue'
+import { RouterView } from "vue-router";
+import Sidebar from "@/components/items/Sidebar.vue";
+import ThemeWrapper from "./components/items/ThemeWrapper.vue";
+import Button from "./components/items/Button.vue";
+
+import { getDemo } from "@/api/userApi";
+getDemo();
 </script>
 
 <template>
