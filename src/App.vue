@@ -11,7 +11,14 @@ getDemo();
 <template>
   <ThemeWrapper>
     <Sidebar></Sidebar>
-    <Button></Button>
+    <Button
+      :height="120"
+      :width="300"
+      :padding="12"
+      :onColor="'#303F9F'"
+      :offColor="'#333333'"
+      :roundColor="'#BBDEFB'"
+    ></Button>
     <RouterView></RouterView>
   </ThemeWrapper>
 </template>

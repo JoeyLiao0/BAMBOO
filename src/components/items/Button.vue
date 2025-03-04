@@ -1,7 +1,7 @@
 <script setup>
-import { useThemeStore } from '@/stores/theme'
-import { storeToRefs } from 'pinia'
-import { ref } from 'vue'
+import { useThemeStore } from "@/stores/theme";
+import { storeToRefs } from "pinia";
+import { ref } from "vue";
 
 const props = defineProps({
   height: {
@@ -12,19 +12,33 @@ const props = defineProps({
     type: Number,
     default: 100,
   },
-  margin: {
+  padding: {
     type: Number,
     default: 4,
   },
-})
+  onColor: {
+    type: String,
+    default: "#2196f3",
+  },
+  offColor: {
+    type: String,
+    default: "#ccc",
+  },
+  roundColor: {
+    type: String,
+    default: "#fff",
+  },
+});
 
-const themeStore = useThemeStore()
-const { currentThemeName } = storeToRefs(themeStore)
+console.log(props);
 
-const isDark = ref(currentThemeName.value === 'dark')
+const themeStore = useThemeStore();
+const { currentThemeName } = storeToRefs(themeStore);
+
+const isDark = ref(currentThemeName.value === "dark");
 
 function toggleSwitch() {
-  themeStore.setTheme(isDark.value ? 'dark' : 'light')
+  themeStore.setTheme(isDark.value ? "dark" : "light");
 }
 </script>
 
@@ -39,10 +53,12 @@ function toggleSwitch() {
 
 <style scoped>
 .switch {
-  --height: v-bind(props.height + 'px');
-  --width: v-bind(props.width + 'px');
-  --margin: v-bind(props.margin + 'px');
-
+  --height: v-bind(props.height + "px");
+  --width: v-bind(props.width + "px");
+  --padding: v-bind(props.padding + "px");
+  --on-color: v-bind(props.onColor); /* 动态绑定选中颜色 */
+  --off-color: v-bind(props.offColor); /* 动态绑定未选中颜色 */
+  --round-color: v-bind(props.roundColor);
   position: relative;
   display: inline-block;
   box-sizing: content-box;
@@ -66,37 +82,30 @@ function toggleSwitch() {
   width: 100%;
   height: 100%;
 
-  background-color: #ccc;
+  background-color: var(--off-color);
   transition:
     background-color 0.8s,
     box-shadow 0.2s;
   border-radius: 999px;
-  border: none;
 }
 
 .round {
   position: absolute;
 
-  height: calc(var(--height) - 2 * var(--margin));
+  height: calc(var(--height) - 2 * var(--padding));
   aspect-ratio: 1 / 1;
 
-  left: var(--margin);
-  bottom: var(--margin);
-
-  margin: auto 0;
+  left: var(--padding);
+  bottom: var(--padding);
 
   transition: transform 0.4s ease;
 
-  background-color: white;
+  background-color: var(--round-color);
   border-radius: 999px;
 }
 
 input:checked + .slider {
-  background-color: #2196f3;
-}
-
-input:focus + .slider {
-  box-shadow: 0 0 1px #2196f3;
+  background-color: var(--on-color);
 }
 
 input:checked + .slider .round {
